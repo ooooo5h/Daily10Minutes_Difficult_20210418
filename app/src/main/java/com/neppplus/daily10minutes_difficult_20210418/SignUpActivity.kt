@@ -2,6 +2,8 @@ package com.neppplus.daily10minutes_difficult_20210418
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import com.neppplus.daily10minutes_difficult_20210418.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -16,7 +18,23 @@ class SignUpActivity : BaseActivity() {
     }
     override fun setupEvents() {
 
-//        이메일 입력칸의 내용 변경이 생기면 => 무조건 다시 검사하도록 문구를 변경하자자
+//        이메일 입력칸의 내용 변경이 생기면 => 무조건 다시 검사하도록 문구를 변경하자
+
+        emailEdt.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+               emailCheckResultTxt.text = "이메일 중복 확인을 해주세요."
+            }
+
+
+        })
 
        emailCheckBtn.setOnClickListener {
 

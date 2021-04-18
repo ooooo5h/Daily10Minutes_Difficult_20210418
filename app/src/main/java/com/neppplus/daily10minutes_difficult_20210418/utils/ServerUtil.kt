@@ -1,5 +1,6 @@
 package com.neppplus.daily10minutes_difficult_20210418.utils
 
+import android.content.Context
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.json.JSONObject
@@ -131,6 +132,40 @@ class ServerUtil {
             })
         }
 
-    }
+//        프로젝트 목록 받아오기
 
+        fun getRequestProjectList(context : Context, handler: JsonResponseHandler?) {
+
+//            GET => 어디로? 어떤 데이터? URL을 만들 때 한꺼번에 모두 적어주는 QUERY => 복잡하니까 OkHttp 라이브러리
+
+            val urlBuilder = "${HOST_URL}/project".toHttpUrlOrNull()!!.newBuilder()
+
+//            만들어진 기초 URL 에 필요한 파라미터들을 붙여주자
+//            urlBuilder.addEncodedQueryParameter("email", email)
+
+//            정보 다 붙었으면 최종 String 형태로 변환
+            val urlString = urlBuilder.build().toString()
+
+            val request = Request.Builder()
+                .url(urlString)
+                .get()
+                .header("X-Http-Token", ContextUtil.getLoginToken(context))
+                .build()
+
+            val client = OkHttpClient()
+
+            client.newCall(request).enqueue(object :Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    val bodyString = response.body!!.string()
+                    val jsonObj = JSONObject(bodyString)
+                    handler?.onResponse(jsonObj)
+                }
+            })
+        }
+    }
 }

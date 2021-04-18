@@ -43,7 +43,7 @@ class MainActivity : BaseActivity() {
 
                 for (i in 0 until projectsArr.length()) {
 
-//                     [ ] 안에 있는 { } 들을, 하나씩 꺼낸 뒤,
+//                     [ ] 안에 있는 { } 들을, 하나씩 꺼낸 뒤, 파싱 : Project 형태로 변환 후, mProject에 추가
                     val projectObj = projectsArr.getJSONObject(i)
 
 //                     파싱 후 mProjects 에 추가하려고 하는데
@@ -53,6 +53,9 @@ class MainActivity : BaseActivity() {
 //                     Project 클래스에 함수(기능) 추가 => JSONObject를 넣으면 Project형태로 변환해주는 기능
 //                     다른 화면에서도 쓸 기능이니까 Project에 함수로 만드는 거임.
                     val project = Project.getProjectFromJson(projectObj)
+
+//                    mProject에 추가하자
+                    mProjects.add(project)
 
                 }
             }

@@ -2,13 +2,16 @@ package com.neppplus.daily10minutes_difficult_20210418
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.neppplus.daily10minutes_difficult_20210418.adapters.ProjectAdapter
 import com.neppplus.daily10minutes_difficult_20210418.datas.Project
 import com.neppplus.daily10minutes_difficult_20210418.utils.ServerUtil
+import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
 class MainActivity : BaseActivity() {
 
     val mProjects = ArrayList<Project>()
+    lateinit var mProjectAdapter: ProjectAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +19,7 @@ class MainActivity : BaseActivity() {
         setupEvents()
         setValues()
     }
+
     override fun setupEvents() {
 
     }
@@ -27,6 +31,10 @@ class MainActivity : BaseActivity() {
 //        => mProjects 에 하나하나 추가하자
 
         getProjectListFromServer()
+
+        mProjectAdapter = ProjectAdapter(mContext, R.layout.project_list_item, mProjects)
+        projectListView.adapter = mProjectAdapter
+
     }
 
     fun getProjectListFromServer() {
@@ -58,6 +66,14 @@ class MainActivity : BaseActivity() {
                     mProjects.add(project)
 
                 }
+
+//                서버 통신이 어댑터 연결보다 먼저 실행되는데, 실제로는 더 늦게 끝날 수도 있다
+//                mProjects.add(project) 데이터 추가가 리스트뷰의 내용 변경일 수도 있으니 notifyDataSetChanged 실행해주자
+
+                runOnUiThread {
+                    mProjectAdapter.notifyDataSetChanged()
+                }
+
             }
         })
     }

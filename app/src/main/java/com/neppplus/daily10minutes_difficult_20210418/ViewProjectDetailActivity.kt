@@ -31,6 +31,8 @@ class ViewProjectDetailActivity : BaseActivity() {
         descriptionTxt.text = mProject.description
         userCountTxt.text = "${mProject.onGoingUserCount}명"
 
+        proofMethodTxt.text = mProject.proofMethod
+
 
     }
 

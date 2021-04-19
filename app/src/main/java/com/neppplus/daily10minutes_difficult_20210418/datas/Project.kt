@@ -8,11 +8,12 @@ class Project(
     var title: String,
     var imageUrl: String,
     var description: String,
-    var onGoingUserCount : Int ) : Serializable {
+    var onGoingUserCount : Int,
+    var proofMethod : String ) : Serializable {
 
 //        보조 생성자를 추가하자. Project() 만으로도 쓸 수 있게 하기위해서!!
 
-    constructor() : this(0, "", "", "", 0)
+    constructor() : this(0, "", "", "", 0, "")
 
 //        기능을 추가하자
 //        JSONObject 을 넣으면 (input)
@@ -31,6 +32,7 @@ class Project(
             project.description = jsonObj.getString("description")
 
             project.onGoingUserCount = jsonObj.getInt("ongoing_users_count")
+            project.proofMethod = jsonObj.getString("proof_method")
 
             return project
 

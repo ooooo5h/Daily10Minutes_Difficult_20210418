@@ -26,6 +26,15 @@ class MainActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        projectListView.setOnItemClickListener { adapterView, view, position, l ->
+
+            val clickedProject = mProjects[position]
+
+            val myIntent = Intent(mContext, ViewProjectDetailActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
        logoutBtn.setOnClickListener {
 
            val alert = AlertDialog.Builder(mContext)

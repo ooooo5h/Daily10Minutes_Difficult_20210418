@@ -1,9 +1,12 @@
 package com.neppplus.daily10minutes_difficult_20210418
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.neppplus.daily10minutes_difficult_20210418.adapters.ProjectAdapter
 import com.neppplus.daily10minutes_difficult_20210418.datas.Project
+import com.neppplus.daily10minutes_difficult_20210418.utils.ContextUtil
 import com.neppplus.daily10minutes_difficult_20210418.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
@@ -21,6 +24,20 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        logoutBtn.setOnClickListener {
+
+            val alert = AlertDialog.Builder(mContext)
+            alert.setTitle("로그아웃")
+            alert.setMessage("정말 로그아웃하시겠습니까?")
+            alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+
+
+            })
+            alert.setNegativeButton("취소", null)
+            alert.show()
+
+        }
 
     }
 

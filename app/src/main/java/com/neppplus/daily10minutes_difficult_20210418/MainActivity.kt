@@ -31,6 +31,7 @@ class MainActivity : BaseActivity() {
             val clickedProject = mProjects[position]
 
             val myIntent = Intent(mContext, ViewProjectDetailActivity::class.java)
+            myIntent.putExtra("projectInto", clickedProject)
             startActivity(myIntent)
 
         }

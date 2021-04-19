@@ -1,13 +1,13 @@
 package com.neppplus.daily10minutes_difficult_20210418.datas
 
 import org.json.JSONObject
+import java.io.Serializable
 
 class Project(
     var id: Int,
     var title: String,
     var imageUrl: String,
-    var description: String
-) {
+    var description: String) : Serializable {
 
 //        보조 생성자를 추가하자. Project() 만으로도 쓸 수 있게 하기위해서!!
 
